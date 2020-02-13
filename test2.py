@@ -1,4 +1,3 @@
-
 import csv
 
 file_name = "snacks1.csv"
@@ -11,12 +10,16 @@ csvReader = csv.reader(csvfile, delimiter=",")
 l =  list()
 #print(l)
 
+
+
+
+'''
 e_data = []
-name = []
+#name = []
 for row in csvReader:
-    
+    print(row)
     #print(row[0])
-    name.append(row[0])
+    #name.append(row[0])
     #print("row is : ", row)
     dt=[]
     new_outtime = None
@@ -32,8 +35,9 @@ for row in csvReader:
     if dt != []:
         e_data.append(dt)
 
-print(name)
+#print(name)
 #print(e_data)
+'''
 
 
 
