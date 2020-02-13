@@ -73,7 +73,13 @@ for datum in demo_employee_data:
         plot(datum[key])
         bar_height = zeros([1440])
 
-
+#for plotting out time labels symmetrically 
+'''
+#rotations = np.rad2deg(theta)
+#for x, bar, rotation, label in zip(theta, bars, rotations, timespan_label ):
+   # lab = ax.text(x,min(outtime_durations)+0.05 , label, 
+       #      ha='left', va='center', rotation=rotation, rotation_mode="anchor")
+'''
 
 
 
