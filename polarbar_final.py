@@ -4,32 +4,16 @@ from matplotlib import pyplot as plt
 import sys
 import csvreader_final
 
-
 #print the numpy array without truncation
 np.set_printoptions(threshold=sys.maxsize)
 
 demo_employee_data = csvreader_final.demo_employee_data
-
-#outtimes = [(508,509),(573,578),(629,633),(714,717),(743,765)]
-#r1 ~ employee name
-#r1 = [(508,509),(573,578),(629,633),(714,717),(743,765)]
-#r2 = [(508,509),(573,578),(629,633)]
-#r3 = [(508,509),(573,578)]
-#r4 = [(508,509)]
-#employee_data = [r1,r2,r3,r4]
-
-#employee_data = csvreader.e_data
-#print(employee_data)
-
-#if employee_data will be a list of dictionaries
-#demo_employee_data = [{'r1':[(525,529),(670,700)]},{'r2':[(530,534),(680710)]}]
 
 #1 degree = 4 min, for 24 hour scale
 r = zeros([360*4])
 theta = np.arange(0,2*np.pi,2*np.pi/1440)
 width = np.pi*2/1440
 
-#bar_height = zeros([1440])
 
 #create a list of empty strings where the length of the list = total number of bars(i.e = 1440)
 timespan_label=[]
@@ -78,13 +62,7 @@ def plot(outtimes):
     fig.savefig('%s.png' %(name)) #, bbox_inches='tight', dpi=1000
     #define this name during the plot function call.it will be inherited here.
 
-
-    '''
-    for h in range(0,len(employee_data)):
-        print(o)
-        fig.savefig('%s.png' %(h)) #, bbox_inches='tight', dpi=1000
-        #plt.show()
-    '''
+#demo_employee_data = [{'r1':[(525,529),(670,700)]},{'r2':[(530,534),(680710)]}] - now in this format
 for datum in demo_employee_data:
     print(datum)
     for key in datum:
@@ -94,22 +72,6 @@ for datum in demo_employee_data:
         name = key
         plot(datum[key])
         bar_height = zeros([1440])
-        
-        
-    
-
-'''
-for data in employee_data:
-    bar_height = zeros([1440])
-    print(data)
-    name = str(len(data)) #this name will be inherited to into the funtion call.
-    
-    plot(data)
-    bar_height = zeros([1440])
-
-#----
-'''
-
 
 
 
