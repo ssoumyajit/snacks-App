@@ -15,12 +15,12 @@ theta = np.arange(0,2*np.pi,2*np.pi/1440)
 width = np.pi*2/1440
 
 
-#create a list of empty strings where the length of the list = total number of bars(i.e = 1440)
-timespan_label=[]
-for i in range(0,1440):
-    timespan_label.append('')
-
 def plot(outtimes):
+
+    #create a list of empty strings where the length of the list = total number of bars(i.e = 1440)
+    timespan_label=[]
+    for i in range(0,1440):
+        timespan_label.append('')
     
     total_outtime = 0
     outtime_durations = []
@@ -30,12 +30,13 @@ def plot(outtimes):
         outtime_durations.append(delta)
         for i in range(j[0],j[1]+1):
             bar_height[i] = delta
+        timespan_label[(j[0]+j[1])//2] = str(delta)+" min"
             
     fig = plt.figure(figsize=(6,6))
     ax = fig.add_axes([0.1, 0.1, 0.75, 0.79], polar=True)
     ax = plt.subplot(111, projection='polar')
-    ax.set_theta_zero_location("S")
-    ax.set_theta_direction(-1) #now it is clockwise
+    #ax.set_theta_zero_location("S")
+    #ax.set_theta_direction(-1) #now it is clockwise
     ax.grid(False)
     ax.spines['polar'].set_visible(True) #shows the outer circle
     ax.set_yticklabels([])      #removes the y-tick labels( i.e bar heights)
@@ -49,9 +50,18 @@ def plot(outtimes):
     textstr = "Total out time = {} min, {} times".format(total_outtime, num_outtimes)
     plt.gcf().text(0.3, 0.02, textstr, fontsize=14)
     
-    
     bars = ax.bar(theta, bar_height, width=width, bottom=0.0, alpha = 0.8) #edgecolor = "k"
     ax.set_ylim(0, min(outtime_durations))
+
+    #for plotting out time labels symmetrically 
+
+    rotations = np.rad2deg(theta)
+    for x, bar, rotation, label in zip(theta, bars, rotations, timespan_label ):
+        lab = ax.text(x,min(outtime_durations) - 0.9 , label, 
+                 ha='left', va='center', rotation=rotation, rotation_mode="anchor")
+    
+
+
     
     #below block of code is udes to save the full screen figure generated
     manager = plt.get_current_fig_manager()
@@ -73,13 +83,8 @@ for datum in demo_employee_data:
         plot(datum[key])
         bar_height = zeros([1440])
 
-#for plotting out time labels symmetrically 
-'''
-#rotations = np.rad2deg(theta)
-#for x, bar, rotation, label in zip(theta, bars, rotations, timespan_label ):
-   # lab = ax.text(x,min(outtime_durations)+0.05 , label, 
-       #      ha='left', va='center', rotation=rotation, rotation_mode="anchor")
-'''
+
+
 
 
 
